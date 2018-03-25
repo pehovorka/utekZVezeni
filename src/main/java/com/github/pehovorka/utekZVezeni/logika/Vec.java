@@ -83,6 +83,10 @@ public class Vec
     public void setProhledatelnost(boolean prohledatelnost){
         this.prohledatelnost=prohledatelnost;
     }
-    //== Soukromé metody (instancí i třídy) ========================================
+   
+    @Override
+    public String toString() {
+    	return getNazev();
+    }
 
 }

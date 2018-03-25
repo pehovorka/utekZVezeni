@@ -182,7 +182,7 @@ public class Prostor {
      * Vrací textový řetězec, který popisuje věci v místnosti, například:
      * "věci: oběd ".
      *
-     * @return Popis východů - názvů sousedních prostorů
+     * @return Popis věcí v prostoru
      */
     private String popisVeci() {     
         String vracenyText = "věci:";
@@ -262,6 +262,16 @@ public class Prostor {
     }
 
     /**
+     * Vrací viditelné věci v prostoru. 
+     * 
+        * @return Kolekce věcí v prostoru
+     */
+    public Collection<Vec> getVeci() {
+        return Collections.unmodifiableCollection(veci.values());
+    }
+
+    
+    /**
      * Vrací názvy skrytých věcí v prostoru. Používá se po zadání příkazu prohledatMístnost. Nastavuje viditelnost skrytých věcí v místnosti na true.
      * 
      * @return skryteVeci - textový řetezec skrytých věcí (odděleny mezerou)
@@ -337,5 +347,9 @@ public class Prostor {
 
         return postavy.get(jmeno);
 
+    }
+    @Override
+    public String toString() {
+    	return getNazev();
     }
 }

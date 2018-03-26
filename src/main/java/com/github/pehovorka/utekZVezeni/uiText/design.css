@@ -1,0 +1,62 @@
+.root {
+     -fx-background-image: url("textura.jpg");
+     -fx-background-position: center; 
+}
+.list-view {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+    
+    -fx-font-size: 15;
+}
+.list-view .list-cell:even {
+-fx-background-color: rgba(200, 200, 200, 0.0);
+-fx-text-fill: white;
+}
+.list-view .list-cell:odd {
+-fx-background-color: rgba(200, 200, 200, 0.0);
+-fx-text-fill: white;
+}
+
+.label{
+
+-fx-font-size: 15;
+-fx-text-fill: white;
+}
+
+.radio-button {
+
+-fx-font-size: 15;
+-fx-text-fill: white;	
+}
+
+.text-area {
+	-fx-background-color: rgba(0, 0, 0, 0.2);	
+    -fx-font-size: 14;
+    -fx-text-fill: white;	
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.text-input {
+	-fx-background-color: rgba(0, 0, 0, 0.2);	
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+}
+
+.button {
+	-fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+	
+}

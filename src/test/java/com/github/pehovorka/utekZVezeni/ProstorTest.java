@@ -51,8 +51,8 @@ public class ProstorTest
      */
     @Test
     public  void testLzeProjit() {      
-        Prostor prostor1 = new Prostor("hala", "vstupní hala budovy VŠE na Jižním městě");
-        Prostor prostor2 = new Prostor("bufet", "bufet, kam si můžete zajít na svačinku");
+        Prostor prostor1 = new Prostor("hala", "vstupní hala budovy VŠE na Jižním městě",0,0);
+        Prostor prostor2 = new Prostor("bufet", "bufet, kam si můžete zajít na svačinku",0,0);
         prostor1.setVychod(prostor2);
         prostor2.setVychod(prostor1);
         assertEquals(prostor2, prostor1.vratSousedniProstor("bufet"));
@@ -64,7 +64,7 @@ public class ProstorTest
     @Test
     public void testVeci()
     {
-        Prostor prostor1 = new Prostor("a", "");
+        Prostor prostor1 = new Prostor("a", "",0,0);
         Vec vec1 = new Vec("A", true);
         Vec vec2 = new Vec("B", true);
         prostor1.vlozVec(vec1);
@@ -82,7 +82,7 @@ public class ProstorTest
     public void testPostava()
     {
         Postava postava1 = new Postava("A", "", "", "", "", null, null);
-        Prostor prostor1 = new Prostor("prostorA", "");
+        Prostor prostor1 = new Prostor("prostorA", "",0,0);
         prostor1.vlozPostavu(postava1);
         assertEquals(true, prostor1.jePostavaVProstoru("A"));
         assertEquals(postava1, prostor1.vratPostavu("A"));
@@ -96,7 +96,7 @@ public class ProstorTest
     public void testKlic()
     {
         Vec vec1 = new Vec("klíč", true);
-        Prostor prostor1 = new Prostor("prostor", "");
+        Prostor prostor1 = new Prostor("prostor", "",0,0);
         assertEquals(false, prostor1.jeZamceno());
         prostor1.zamknout(true);
         assertEquals(true, prostor1.jeZamceno());

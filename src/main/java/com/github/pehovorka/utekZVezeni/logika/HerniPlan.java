@@ -36,16 +36,16 @@ public class HerniPlan extends Observable{
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
-        Prostor dvur = new Prostor("dvůr","vězeňský dvůr");
-        Prostor jidelna = new Prostor("jídelna","vězeňská jídelna - gastronomické nebe");
-        Prostor chodbaHlavni = new Prostor("chodba","hlavní spojovací chodba");
-        Prostor chodbaCely = new Prostor("chodbaCely","chodba u cel");
-        Prostor vzduchotechnika = new Prostor("vzduchotechnika","místnost vzduchotechniky");
-        Prostor toalety = new Prostor("wc","záchody - co to tu páchne?");
-        Prostor cela = new Prostor("cela","moje cela - můj dům");
-        Prostor sachta = new Prostor("větracíŠachta","větrací šachta - tady to páchne ještě hůř");
-        Prostor stoka = new Prostor("stoka","stoka - nechi vidět, co tu plave");
-        Prostor svoboda = new Prostor("svoboda","Jsi venku!");
+        Prostor dvur = new Prostor("dvůr","vězeňský dvůr",340,310);
+        Prostor jidelna = new Prostor("jídelna","vězeňská jídelna - gastronomické nebe",523, 180);
+        Prostor chodbaHlavni = new Prostor("chodba","hlavní spojovací chodba",392,212);
+        Prostor chodbaCely = new Prostor("chodbaCely","chodba u cel",398,121);
+        Prostor vzduchotechnika = new Prostor("vzduchotechnika","místnost vzduchotechniky",535,267);
+        Prostor toalety = new Prostor("wc","záchody - co to tu páchne?",226,281);
+        Prostor cela = new Prostor("cela","moje cela - můj dům",243,162);
+        Prostor sachta = new Prostor("větracíŠachta","větrací šachta - tady to páchne ještě hůř",180,300);
+        Prostor stoka = new Prostor("stoka","stoka - nechi vidět, co tu plave",115,280);
+        Prostor svoboda = new Prostor("svoboda","Jsi venku!",210,10);
 
         //vytváření věcí
         Vec obed = new Vec("oběd",true);

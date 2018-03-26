@@ -8,7 +8,6 @@ import com.github.pehovorka.utekZVezeni.logika.IHra;
 import com.github.pehovorka.utekZVezeni.logika.Postava;
 import com.github.pehovorka.utekZVezeni.logika.Prostor;
 import com.github.pehovorka.utekZVezeni.logika.Vec;
-import com.github.pehovorka.utekZVezeni.logika.Batoh;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,13 +15,14 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.RadioButton;
+import javafx.scene.image.ImageView;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou
@@ -41,7 +41,11 @@ public class HomeController extends GridPane implements Observer {
 	@FXML private ListView<Vec> seznamVeci;
 	@FXML private ListView<Postava> seznamPostav;
 	@FXML private ListView<Vec> seznamBatoh;
+	@FXML private ComboBox<Postava> seznamPostavDej;
+	@FXML private ComboBox<Vec> seznamVeciDej;
 	@FXML private ToggleGroup prostoryGroup;
+	@FXML private ImageView uzivatel;
+	@FXML private Button dej;
 	private IHra hra;
 	
 	
@@ -53,6 +57,7 @@ public class HomeController extends GridPane implements Observer {
 			textVypis.appendText("\n\n Konec hry \n");
 			textVstup.setDisable(true);
 			odesli.setDisable(true);
+			prohledatMistnost.setDisable(true);
 		}
 	}
 	
@@ -71,6 +76,7 @@ public class HomeController extends GridPane implements Observer {
 			textVypis.appendText("\n\n Konec hry \n");
 			textVstup.setDisable(true);
 			odesli.setDisable(true);
+			prohledatMistnost.setDisable(true);
 		}
 	}
 		/**
@@ -131,7 +137,7 @@ public class HomeController extends GridPane implements Observer {
 			alert.setTitle("Odhození předmětu");
 			alert.setHeaderText("Opravdu chcete odhodit "+seznamBatoh.getSelectionModel().getSelectedItem()+" z batohu?");
 
-			ButtonType buttonAno = new ButtonType("Ano");
+			ButtonType buttonAno = new ButtonType("Ano", ButtonData.YES);
 			ButtonType buttonNe = new ButtonType("Ne", ButtonData.CANCEL_CLOSE);
 
 			alert.getButtonTypes().setAll(buttonAno, buttonNe);
@@ -144,27 +150,40 @@ public class HomeController extends GridPane implements Observer {
 		}
 		}
 	
+		/**
+		 * Metoda pro zpracování kliku na tlačítko „Prohledat místnost“
+		 * 
+		 */
+		@FXML public void prohledatMistnost() {
+			vypis(hra.zpracujPrikaz("prohledatMístnost"));
+		}
+		
+		/**
+		 * Metoda pro zpracování kliku na tlačítko „Prohledat místnost“
+		 * 
+		 */
+		@FXML public void dej() {
+			vypis(hra.zpracujPrikaz("dej "+seznamPostavDej.getSelectionModel().getSelectedItem()+" "+seznamVeciDej.getSelectionModel().getSelectedItem()));
+		}
 
 	
 	public void inicializuj(IHra hra) {
 		this.hra = hra;
 		textVypis.setText(hra.vratUvitani());
 		seznamVeci.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelneVeci());
+		seznamVeciDej.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
 		seznamMistnosti.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
 		seznamPostav.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelnePostavy());
+		seznamPostavDej.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelnePostavy());
 		seznamBatoh.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
+		uzivatel.setX(hra.getHerniPlan().getAktualniProstor().getX());
+		uzivatel.setY(hra.getHerniPlan().getAktualniProstor().getY());
 		hra.getHerniPlan().addObserver(this);
 	    hra.getHerniPlan().getBatoh().addObserver(this);
 	    hra.getHerniPlan().getAktualniProstor().addObserver(this);
 	  }
 	
-	/**
-	 * Metoda pro zpracování kliku na tlačítko „Prohledat místnost“
-	 * 
-	 */
-	@FXML public void prohledatMistnost() {
-		vypis(hra.zpracujPrikaz("prohledatMístnost"));
-	}
+	
 	
 
 	@Override
@@ -173,10 +192,16 @@ public class HomeController extends GridPane implements Observer {
 		seznamMistnosti.getItems().clear();
 		seznamPostav.getItems().clear();
 		seznamBatoh.getItems().clear();
+		seznamVeciDej.getItems().clear();
+		seznamPostavDej.getItems().clear();
 		seznamVeci.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelneVeci());
+		seznamVeciDej.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
 		seznamMistnosti.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
 		seznamPostav.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelnePostavy());
+		seznamPostavDej.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelnePostavy());
 		seznamBatoh.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
+		uzivatel.setX(hra.getHerniPlan().getAktualniProstor().getX());
+	    uzivatel.setY(hra.getHerniPlan().getAktualniProstor().getY());
 		System.out.println("Dostal jsem zprávu, updatuji se!");
 	    hra.getHerniPlan().getAktualniProstor().addObserver(this);
 

@@ -63,7 +63,7 @@ public final class Start extends Application
     	
     	primaryStage.setScene(new Scene(root));
     	primaryStage.show();
-    	primaryStage.setTitle("Základní adventura");
+    	primaryStage.setTitle("Útěk z vězení");
 		
 	}
 }

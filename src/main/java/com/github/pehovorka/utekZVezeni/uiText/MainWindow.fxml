@@ -39,13 +39,13 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <ListView fx:id="seznamMistnosti" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="seznamMistnosti" onMouseClicked="#klikMistnost" prefHeight="200.0" prefWidth="200.0" />
             <ImageView fitHeight="500.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@mapa.jpg" />
                </image>
             </ImageView>
-            <ListView fx:id="seznamVeci" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="seznamVeci" onMouseClicked="#klikVec" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </HBox>
    </children>

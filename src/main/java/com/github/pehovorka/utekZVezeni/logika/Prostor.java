@@ -2,6 +2,7 @@ package com.github.pehovorka.utekZVezeni.logika;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.Observable;
 
 /**
  * Trida Prostor - popisuje jednotlivé prostory (místnosti) hry
@@ -15,12 +16,13 @@ import java.util.stream.Collectors;
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2016/2017
  */
-public class Prostor {
+public class Prostor extends Observable {
 
     private String nazev;
     private String popis;
     private Set<Prostor> vychody;   // obsahuje sousední místnosti
     private Map<String, Vec> veci;
+    private Map<String, Vec> viditelneVeci;
     private Map<String, Postava> postavy;
     private boolean zamceno=false;
     private Vec klic;
@@ -39,6 +41,7 @@ public class Prostor {
         veci = new HashMap<>();
         postavy = new HashMap <> ();
     }
+    
 
     /**
      * Definuje východ z prostoru (sousední/vedlejsi prostor). Vzhledem k tomu,
@@ -240,6 +243,8 @@ public class Prostor {
      */
     public void vlozVec(Vec neco){
         veci.put(neco.getNazev(), neco);
+        this.setChanged();
+        this.notifyObservers();
     } 
 
     /**
@@ -257,17 +262,27 @@ public class Prostor {
      * 
      * @param neco - odebíraná věc
      */
+
     public void odeberVec(Vec neco){
         veci.remove(neco.getNazev(), neco);
+        this.setChanged();
+        this.notifyObservers();
     }
+    
+
 
     /**
      * Vrací viditelné věci v prostoru. 
      * 
         * @return Kolekce věcí v prostoru
      */
-    public Collection<Vec> getVeci() {
-        return Collections.unmodifiableCollection(veci.values());
+    public Collection<Vec> getViditelneVeci() {
+        viditelneVeci = new HashMap<>();
+    	for (String nazev:veci.keySet()) {
+            if ((veci.get(nazev)).jeViditelna()){
+               viditelneVeci.put(nazev,veci.get(nazev));}
+        };
+        return Collections.unmodifiableCollection(viditelneVeci.values());
     }
 
     
@@ -284,6 +299,8 @@ public class Prostor {
                 skryteVeci += nazev + " ";
             }
         }
+        this.setChanged();
+        this.notifyObservers();
         return skryteVeci;
     }
 

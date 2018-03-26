@@ -10,7 +10,7 @@ import java.util.*;
  * @author    Petr Hovorka
  * @version   1.0
  */
-public class Batoh
+public class Batoh extends Observable
 {
     //== Datové atributy (statické i instancí)======================================
     private Map<String, Vec> seznamVeci;
@@ -34,6 +34,8 @@ public class Batoh
     public boolean vlozVec(Vec neco){
         if (isMisto()){
             seznamVeci.put(neco.getNazev(),neco);
+            this.setChanged();
+            this.notifyObservers();
             return true;
         }
         else {

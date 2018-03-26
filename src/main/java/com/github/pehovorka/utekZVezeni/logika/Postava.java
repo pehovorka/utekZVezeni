@@ -194,4 +194,8 @@ public class Postava
         this.viditelna = viditelna;
     }
    
+    @Override
+    public String toString() {
+    	return getJmeno();
+    }
 }

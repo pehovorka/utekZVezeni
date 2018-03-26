@@ -98,5 +98,16 @@ public class Batoh extends Observable
         }
         return text;
     }
+    
+    /**
+     * Vrací kolekci věcí v batohu. 
+     * 
+        * @return Kolekce věcí v batohu
+     */
+    public Collection<Vec> getSeznamVeci() {
+        
+        return Collections.unmodifiableCollection(seznamVeci.values());
+    }
+    
 
 }

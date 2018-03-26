@@ -2,18 +2,27 @@ package com.github.pehovorka.utekZVezeni.uiText;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 
 import com.github.pehovorka.utekZVezeni.logika.IHra;
+import com.github.pehovorka.utekZVezeni.logika.Postava;
 import com.github.pehovorka.utekZVezeni.logika.Prostor;
 import com.github.pehovorka.utekZVezeni.logika.Vec;
+import com.github.pehovorka.utekZVezeni.logika.Batoh;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.RadioButton;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou
@@ -27,8 +36,12 @@ public class HomeController extends GridPane implements Observer {
 	@FXML private TextField textVstup;
 	@FXML private TextArea textVypis;
 	@FXML private Button odesli;
+	@FXML private Button prohledatMistnost;
 	@FXML private ListView<Prostor> seznamMistnosti;
 	@FXML private ListView<Vec> seznamVeci;
+	@FXML private ListView<Postava> seznamPostav;
+	@FXML private ListView<Vec> seznamBatoh;
+	@FXML private ToggleGroup prostoryGroup;
 	private IHra hra;
 	
 	
@@ -66,7 +79,17 @@ public class HomeController extends GridPane implements Observer {
 		 * @param	klik – kliknutí na prvek v seznamu prostorů
 		 */
 		@FXML public void klikMistnost (MouseEvent klik) {
-			vypis(hra.zpracujPrikaz("jdi "+seznamMistnosti.getSelectionModel().getSelectedItem()));
+			
+			if (seznamMistnosti.getSelectionModel().isEmpty()) {}
+			else {
+			
+			if (prostoryGroup.getSelectedToggle().getUserData().toString().equals("Jdi")) {
+				vypis(hra.zpracujPrikaz("jdi "+seznamMistnosti.getSelectionModel().getSelectedItem()));
+				System.out.println(prostoryGroup.getSelectedToggle().getUserData().toString());
+			}
+			else {vypis(hra.zpracujPrikaz("odemkni "+seznamMistnosti.getSelectionModel().getSelectedItem()));
+			System.out.println(prostoryGroup.getSelectedToggle().getUserData().toString());}
+		}
 		}
 		
 		/**
@@ -75,7 +98,50 @@ public class HomeController extends GridPane implements Observer {
 		 * @param	klik – kliknutí na prvek v seznamu věcí
 		 */
 		@FXML public void klikVec (MouseEvent klik) {
+			if (seznamVeci.getSelectionModel().isEmpty()) {}
+			else {
+			
 			vypis(hra.zpracujPrikaz("seber "+seznamVeci.getSelectionModel().getSelectedItem()));
+		}
+		}
+		
+		/**
+		 * Metoda pro zpracování kliku v seznamu postav
+		 * 
+		 * @param	klik – kliknutí na prvek v seznamu postav
+		 */
+		@FXML public void klikPostava (MouseEvent klik) {
+			if (seznamPostav.getSelectionModel().isEmpty()) {}
+			else {
+			
+			vypis(hra.zpracujPrikaz("mluv "+seznamPostav.getSelectionModel().getSelectedItem()));
+		}
+		}
+		
+		/**
+		 * Metoda pro zpracování kliku v seznamu batohu
+		 * 
+		 * @param	klik – kliknutí na prvek v seznamu batohu
+		 */
+		@FXML public void klikBatoh (MouseEvent klik) {
+			//vypis(hra.zpracujPrikaz("odhoď "+seznamBatoh.getSelectionModel().getSelectedItem()));
+			if (seznamBatoh.getSelectionModel().isEmpty()) {}
+			else {			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Odhození předmětu");
+			alert.setHeaderText("Opravdu chcete odhodit "+seznamBatoh.getSelectionModel().getSelectedItem()+" z batohu?");
+
+			ButtonType buttonAno = new ButtonType("Ano");
+			ButtonType buttonNe = new ButtonType("Ne", ButtonData.CANCEL_CLOSE);
+
+			alert.getButtonTypes().setAll(buttonAno, buttonNe);
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == buttonAno){
+				vypis(hra.zpracujPrikaz("odhoď "+seznamBatoh.getSelectionModel().getSelectedItem()));
+			} 
+			else {}
+		}
 		}
 	
 
@@ -85,17 +151,35 @@ public class HomeController extends GridPane implements Observer {
 		textVypis.setText(hra.vratUvitani());
 		seznamVeci.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelneVeci());
 		seznamMistnosti.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
+		seznamPostav.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelnePostavy());
+		seznamBatoh.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
 		hra.getHerniPlan().addObserver(this);
 	    hra.getHerniPlan().getBatoh().addObserver(this);
 	    hra.getHerniPlan().getAktualniProstor().addObserver(this);
+	  }
+	
+	/**
+	 * Metoda pro zpracování kliku na tlačítko „Prohledat místnost“
+	 * 
+	 */
+	@FXML public void prohledatMistnost() {
+		vypis(hra.zpracujPrikaz("prohledatMístnost"));
 	}
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
 		seznamVeci.getItems().clear();
 		seznamMistnosti.getItems().clear();
+		seznamPostav.getItems().clear();
+		seznamBatoh.getItems().clear();
 		seznamVeci.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelneVeci());
 		seznamMistnosti.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
+		seznamPostav.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getViditelnePostavy());
+		seznamBatoh.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
+		System.out.println("Dostal jsem zprávu, updatuji se!");
+	    hra.getHerniPlan().getAktualniProstor().addObserver(this);
+
 		
 	}
 

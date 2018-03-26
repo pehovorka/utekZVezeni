@@ -2,6 +2,7 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package com.github.pehovorka.utekZVezeni.logika;
 
+import java.util.Observable;
 
 //import java.util.Map;
 //import java.util.HashMap;
@@ -12,7 +13,7 @@ package com.github.pehovorka.utekZVezeni.logika;
  * @author    Petr Hovorka
  * @version   1.0
  */
-public class Vec
+public class Vec extends Observable
 {
     //== Datové atributy (statické i instancí)======================================
     private String nazev;
@@ -74,6 +75,8 @@ public class Vec
      */
     public void setViditelnost(boolean viditelnost){
         this.viditelnost=viditelnost;
+        this.setChanged();
+        this.notifyObservers();
     }
     /**
      * Nastavuje prohledatelnost věci

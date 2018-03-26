@@ -1,5 +1,6 @@
 package com.github.pehovorka.utekZVezeni.logika;
 
+import java.io.Console;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.Observable;
@@ -24,8 +25,10 @@ public class Prostor extends Observable {
     private Map<String, Vec> veci;
     private Map<String, Vec> viditelneVeci;
     private Map<String, Postava> postavy;
+    private Map<String, Postava> viditelnePostavy;
     private boolean zamceno=false;
     private Vec klic;
+
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
@@ -274,7 +277,7 @@ public class Prostor extends Observable {
     /**
      * Vrací viditelné věci v prostoru. 
      * 
-        * @return Kolekce věcí v prostoru
+        * @return Kolekce viditelných věcí v prostoru
      */
     public Collection<Vec> getViditelneVeci() {
         viditelneVeci = new HashMap<>();
@@ -283,6 +286,21 @@ public class Prostor extends Observable {
                viditelneVeci.put(nazev,veci.get(nazev));}
         };
         return Collections.unmodifiableCollection(viditelneVeci.values());
+    }
+    
+    /**
+     * Vrací viditelné postavy v prostoru. 
+     * 
+        * @return Kolekce viditelných věcí v prostoru
+     */
+    public Collection<Postava> getViditelnePostavy() {
+        viditelnePostavy = new HashMap<>();
+    	for (String jmeno:postavy.keySet()) {
+            if ((postavy.get(jmeno)).jeViditelna()){
+               viditelnePostavy.put(jmeno,postavy.get(jmeno));
+            }
+        };
+        return Collections.unmodifiableCollection(viditelnePostavy.values());
     }
 
     
@@ -365,6 +383,9 @@ public class Prostor extends Observable {
         return postavy.get(jmeno);
 
     }
+    
+
+    
     @Override
     public String toString() {
     	return getNazev();

@@ -179,6 +179,7 @@ public class HerniPlan extends Observable{
         aktualniProstor = prostor;
         this.setChanged();
         this.notifyObservers();
+        System.out.println(aktualniProstor);
     }
 
     /**

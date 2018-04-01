@@ -20,6 +20,7 @@ import java.util.Observable;
 public class Prostor extends Observable {
 
     private String nazev;
+    private String hezkyNazev;
     private String popis;
     private double x;
     private double y;
@@ -39,8 +40,9 @@ public class Prostor extends Observable {
      * víceslovný název bez mezer.
      * @param popis Popis prostoru.
      */
-    public Prostor(String nazev, String popis, double x, double y) {
+    public Prostor(String nazev, String hezkyNazev, String popis, double x, double y) {
         this.nazev = nazev;
+        this.hezkyNazev = hezkyNazev;
         this.popis = popis;
         this.x = x;
         this.y = y;
@@ -117,6 +119,15 @@ public class Prostor extends Observable {
      */
     public String getNazev() {
         return nazev;       
+    }
+    /**
+     * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr
+     * konstruktoru)
+     *
+     * @return název prostoru
+     */
+    public String getHezkyNazev() {
+        return hezkyNazev;       
     }
 
     /**
@@ -406,6 +417,6 @@ public class Prostor extends Observable {
     
     @Override
     public String toString() {
-    	return getNazev();
+    	return getHezkyNazev();
     }
 }

@@ -1,5 +1,6 @@
 package com.github.pehovorka.utekZVezeni.logika;
 
+
 /**
  *  Třída Hra - třída představující logiku adventury.
  * 
@@ -34,6 +35,7 @@ public class Hra implements IHra {
         platnePrikazy.vlozPrikaz(new PrikazOdemkni(herniPlan));
         platnePrikazy.vlozPrikaz(new PrikazDej(herniPlan));
     }
+    
 
     /**
      *  Vrátí úvodní zprávu pro hráče.

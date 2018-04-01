@@ -17,6 +17,7 @@ public class Vec
 {
     //== Datové atributy (statické i instancí)======================================
     private String nazev;
+    private String hezkyNazev;
     private boolean prenositelnost;
     private boolean viditelnost = true;
     private boolean prohledatelnost = false;
@@ -28,10 +29,11 @@ public class Vec
      *  @param nazev - název věci
      *  @param prenositelnost - booleanovská hodnota, zda je věc přenositelná
      */
-    public Vec(String nazev, boolean prenositelnost)
+    public Vec(String nazev, String hezkyNazev, boolean prenositelnost)
     {
         this.nazev = nazev;
         this.prenositelnost = prenositelnost;
+        this.hezkyNazev = hezkyNazev;
         //obsahVeci = new HashMap<String,Vec>();
     }
 
@@ -43,6 +45,14 @@ public class Vec
      */
     public String getNazev(){
         return nazev;
+    }
+    /**
+     * Vrací hezký název věci (pro gui).
+     * 
+     * @return hezkyNazev - hezký název věci
+     */
+    public String getHezkyNazev(){
+        return hezkyNazev;
     }
     /**
      * Vrací přenositelnost věci.
@@ -87,7 +97,7 @@ public class Vec
    
     @Override
     public String toString() {
-    	return getNazev();
+    	return getHezkyNazev();
     }
 
 }

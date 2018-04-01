@@ -47,6 +47,18 @@
     -fx-background-color: transparent;
 }
 
+.scroll-bar{
+ -fx-background-color: rgba(0, 0, 0, 0.2);
+ -fx-background-radius: 2em;
+}
+
+.scroll-bar:vertical .thumb {
+ -fx-background-color: rgba(0, 0, 0, 0.4);
+ -fx-background-insets: 0 4 0 4;
+ -fx-background-radius: 2em;
+}
+
+
 .text-input {
 	-fx-background-color: rgba(0, 0, 0, 0.2);	
     -fx-font-size: 14;
@@ -59,4 +71,34 @@
     -fx-text-fill: white;
     -fx-font-size: 14;
 	
+}
+
+.menu-bar {
+	-fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+.combo-box-popup .list-view 
+{
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-text-fill: white;
+} 
+
+.context-menu
+{
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-text-fill: white;
+} 
+
+.combo-box-base  
+{
+	-fx-background-color: rgba(0, 0, 0, 0.2);
+	-fx-text-fill: white;
+}
+
+.combo-box .cell:selected {
+    -fx-text-fill: white;
+    -fx-font-size: 14;
 }

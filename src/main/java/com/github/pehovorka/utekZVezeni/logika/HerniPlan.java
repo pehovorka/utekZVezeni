@@ -17,6 +17,7 @@ public class HerniPlan extends Observable{
     private Prostor aktualniProstor;
     private Prostor viteznyProstor;
     private Prostor prohranyProstor;
+    private Prostor puvodniProstor;
     private Vec viteznaVec;
     private Batoh batoh;
 
@@ -36,27 +37,27 @@ public class HerniPlan extends Observable{
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
-        Prostor dvur = new Prostor("dvůr","vězeňský dvůr",340,310);
-        Prostor jidelna = new Prostor("jídelna","vězeňská jídelna - gastronomické nebe",523, 180);
-        Prostor chodbaHlavni = new Prostor("chodba","hlavní spojovací chodba",392,212);
-        Prostor chodbaCely = new Prostor("chodbaCely","chodba u cel",398,121);
-        Prostor vzduchotechnika = new Prostor("vzduchotechnika","místnost vzduchotechniky",535,267);
-        Prostor toalety = new Prostor("wc","záchody - co to tu páchne?",226,281);
-        Prostor cela = new Prostor("cela","moje cela - můj dům",243,162);
-        Prostor sachta = new Prostor("větracíŠachta","větrací šachta - tady to páchne ještě hůř",180,300);
-        Prostor stoka = new Prostor("stoka","stoka - nechi vidět, co tu plave",115,280);
-        Prostor svoboda = new Prostor("svoboda","Jsi venku!",210,10);
+        Prostor dvur = new Prostor("dvůr","dvůr","vězeňský dvůr",340,310);
+        Prostor jidelna = new Prostor("jídelna","jídelna","vězeňská jídelna - gastronomické nebe",523, 180);
+        Prostor chodbaHlavni = new Prostor("chodba","hlavní chodba","hlavní spojovací chodba",392,212);
+        Prostor chodbaCely = new Prostor("chodbaCely","chodba u cel","chodba u cel",398,121);
+        Prostor vzduchotechnika = new Prostor("vzduchotechnika","vzduchotechnika","místnost vzduchotechniky",535,267);
+        Prostor toalety = new Prostor("wc","toalety","záchody - co to tu páchne?",226,281);
+        Prostor cela = new Prostor("cela","moje cela","moje cela - můj dům",243,162);
+        Prostor sachta = new Prostor("větracíŠachta","větrací šachta","větrací šachta - tady to páchne ještě hůř",180,300);
+        Prostor stoka = new Prostor("stoka","stoka","stoka - nechi vidět, co tu plave",115,280);
+        Prostor svoboda = new Prostor("svoboda","svoboda","Jsi venku!",210,10);
 
         //vytváření věcí
-        Vec obed = new Vec("oběd",true);
-        Vec cigarety = new Vec("cigarety",true);
-        Vec klicVzduchotechnika = new Vec("klíč1",true);
-        Vec klicSachta = new Vec("klíč2",true);
-        Vec propustka = new Vec("",true);
-        Vec potkan = new Vec("mrtvýPotkan",true);
-        Vec misa = new Vec("záchodováMísa",false);
-        Vec zvykacka = new Vec("nalepenáŽvýkačka",true);
-        Vec pacidlo = new Vec("páčidlo",true);
+        Vec obed = new Vec("oběd","oběd",true);
+        Vec cigarety = new Vec("cigarety","cigarety",true);
+        Vec klicVzduchotechnika = new Vec("klíč1","nějaký klíč",true);
+        Vec klicSachta = new Vec("klíč2","další klíč",true);
+        Vec propustka = new Vec(null,null,true);
+        Vec potkan = new Vec("mrtvýPotkan","mrtvý potkan",true);
+        Vec misa = new Vec("záchodováMísa","záchodová mísa",false);
+        Vec zvykacka = new Vec("nalepenáŽvýkačka","nalepená žvýkačka",true);
+        Vec pacidlo = new Vec("páčidlo","páčidlo",true);
 
         //postavy – jméno, úvodní proslov, proslov k věci kterou nechce, proslov k věci kterou chce, proslov po výměně, věc kterou chce, věc kterou dá
         Postava fero = new Postava("Fero","Nazdárek kámo!","Nic nechci","","",null,null);
@@ -127,20 +128,33 @@ public class HerniPlan extends Observable{
         stoka.zamknout(true);
 
         //definice prostorů a věcí důležitých pro příběh      
-        aktualniProstor = jidelna;  // hra začíná v jídelně      
+        aktualniProstor = jidelna;  // hra začíná v jídelně
+        puvodniProstor = jidelna; //hra začáná v jídelně
         viteznyProstor = svoboda; //hra končí na svobodě
         prohranyProstor = cela;  //hra končí neúspěšně, pokud hráč vleze do cely
         viteznaVec = propustka; //hra je vyhrána pokud dá hráč bezdomovci cigarety, ten mu za ní dá Věc propustka (nepráskne ho)
     }
 
     /**
-     *  Metoda vrací odkaz na aktuální prostor, ve ktetém se hráč právě nachází.
+     *  Metoda vrací odkaz na aktuální prostor, ve kterém se hráč právě nachází.
      *
      *  @return     aktuální prostor
      */
 
     public Prostor getAktualniProstor() {
         return aktualniProstor;
+    }
+    
+    /**
+     *  Metoda vrací odkaz na původní prostor, používá se při spuštění nové hry z menu.
+     *
+     *  @return     původní prostor
+     */
+
+    public Prostor getPuvodniProstor() {
+    	this.setChanged();
+        this.notifyObservers();
+    	return puvodniProstor;
     }
 
     /**
@@ -189,6 +203,18 @@ public class HerniPlan extends Observable{
      */
     public Batoh getBatoh() {
         return batoh;
+    }
+    
+    /**
+     * Metoda vytváří batoh
+     *
+     * @return batoh
+     */
+    public Batoh novyBatoh() {
+        batoh = new Batoh();
+        this.setChanged();
+        this.notifyObservers();
+    	return batoh;
     }
 
 

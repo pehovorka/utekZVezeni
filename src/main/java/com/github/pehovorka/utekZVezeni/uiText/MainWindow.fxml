@@ -37,8 +37,8 @@
                   <ComboBox fx:id="seznamPostavDej" prefWidth="150.0" />
                   <Label text="Co:" />
                   <ComboBox fx:id="seznamVeciDej" prefWidth="150.0" />
-                  <Button fx:id="dej" mnemonicParsing="false" onAction="#dej" text="Dej" />
-                  <Button fx:id="prohledatMistnost" mnemonicParsing="false" onAction="#prohledatMistnost" text="Prohledat místnost">
+                  <Button fx:id="dej" mnemonicParsing="false" onAction="#klikDej" text="Dej" />
+                  <Button fx:id="prohledatMistnost" mnemonicParsing="false" onAction="#klikProhledatMistnost" text="Prohledat místnost">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -74,6 +74,18 @@
             <VBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="175.0">
                 
                <children>
+                  <MenuBar>
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Hra">
+                        <items>
+                          	<MenuItem fx:id="novaHra" mnemonicParsing="false" onAction="#klikNovaHra" text="Nová hra" />
+                            <MenuItem fx:id="konecHry" mnemonicParsing="false" onAction="#klikKonecHry" text="Konec hry" />
+                            <MenuItem mnemonicParsing="false" onAction="#klikNapoveda" text="Nápověda" />
+                            <MenuItem fx:id="zavrit" mnemonicParsing="false" onAction="#klikZavrit" text="Zavřít" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
                   <Label text="Prostory" />
                   <RadioButton mnemonicParsing="false" selected="true" text="Jdi" userData="Jdi">
                      <toggleGroup>
@@ -81,8 +93,6 @@
                      </toggleGroup></RadioButton>
                   <RadioButton mnemonicParsing="false" text="Odemkni" toggleGroup="$prostoryGroup" userData="Odemkni" />
                   <ListView fx:id="seznamMistnosti" onMouseClicked="#klikMistnost" prefHeight="200.0" prefWidth="175.0" />
-                  <Label text="Postavy v prostoru - mluvit" />
-                  <ListView fx:id="seznamPostav" minWidth="-Infinity" onMouseClicked="#klikPostava" prefHeight="200.0" prefWidth="175.0" />
                </children>
             </VBox>
             <AnchorPane maxHeight="-Infinity" maxWidth="650.0" minWidth="650.0" prefHeight="500.0" prefWidth="650.0">
@@ -103,6 +113,8 @@
                <children>
                   <Label text="Věci v prostoru - sebrat" />
                   <ListView fx:id="seznamVeci" onMouseClicked="#klikVec" prefHeight="200.0" prefWidth="200.0" />
+                  <Label text="Postavy v prostoru - mluvit" />
+                  <ListView fx:id="seznamPostav" minWidth="-Infinity" onMouseClicked="#klikPostava" prefHeight="200.0" prefWidth="175.0" />
                </children>
             </VBox>
          </children>

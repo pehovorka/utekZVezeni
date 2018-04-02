@@ -122,7 +122,7 @@ public class Postava
     /**
      * Metoda vykoná výměnu předmětů s druhou postavou.
      *
-     * @param věc, kterou hráč nabízí postavě
+     * @param nabidka věc, kterou hráč nabízí postavě
      * @return dvojice - věc, kterou postava dá hráči a proslov, který přednese
      */
     public Dvojice vymena(Vec nabidka){
@@ -140,7 +140,7 @@ public class Postava
      /**
      * Nastaví jinou postavu, kterou může postava zviditelnit
      * 
-     * @param postava, ktorou zviditelní postava
+     * @param zviditelnovana postava, kterou zviditelní postava
      */
     public void setZviditelnovanaPostava(Postava zviditelnovana){
         this.zviditelnovanaPostava = zviditelnovana;
@@ -158,7 +158,7 @@ public class Postava
      /**
      * Nastaví věc, kterou může postava učinit prohledatelnou
      * 
-     * @param věc, ktorou zprohledatelní postava
+     * @param prohledavatelna věc, ktorou zprohledatelní postava
      */
     public void setZprohledatelnovanaVec(Vec prohledavatelna){
         this.zprohledatelnovanaVec = prohledavatelna;
@@ -186,7 +186,7 @@ public class Postava
     /**
      * Nastavuje viditelnost postavy
      * 
-     * @param booleanovská hodnota, zda má být viditelná
+     * @param viditelna booleanovská hodnota, zda má být viditelná
      */
     public void setViditelna (boolean viditelna) 
     {

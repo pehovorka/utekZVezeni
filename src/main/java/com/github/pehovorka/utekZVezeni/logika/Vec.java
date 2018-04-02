@@ -101,7 +101,7 @@ public class Vec
     /**
      * Nastavuje viditelnost věci v batohu
      * 
-     * @param viditelnost – booleanovská hodnota viditelnosti 
+     * @param viditelnostVBatohu – booleanovská hodnota viditelnosti 
      */
     public void setViditelnostVBatohu(boolean viditelnostVBatohu){
         this.viditelnostVBatohu=viditelnostVBatohu;

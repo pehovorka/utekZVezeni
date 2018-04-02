@@ -71,6 +71,7 @@ public class Batoh extends Observable
 
     /**
      * Metoda najde věc, kterou chceme získat
+     * @param nazev - nazev hledané věci
      * @return věc
      */
     public Vec getVec(String nazev) {

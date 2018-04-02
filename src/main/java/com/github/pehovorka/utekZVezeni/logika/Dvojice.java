@@ -18,8 +18,8 @@ public class Dvojice
 
     /***************************************************************************
      *  Konstruktor
-     *  @param věc, kterou postava vrací
-     *  @param textový řetězec, který říká postava
+     *  @param vracenaVec věc, kterou postava vrací
+     *  @param vracenaRec textový řetězec, který říká postava
      */
     public Dvojice(Vec vracenaVec, String vracenaRec)
     {

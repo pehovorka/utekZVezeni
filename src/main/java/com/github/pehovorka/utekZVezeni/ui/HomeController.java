@@ -85,6 +85,9 @@ public class HomeController extends GridPane implements Observer {
 
 	/**
 	 * Metoda pro zpracování příkazů zadávané kliknutím na prvky v GUI.
+	 * 
+	 * @param text
+	 *            příkaz pro zpracování
 	 */
 	public void vypis(String text) {
 		String odpoved = "\n--------\n" + text;
@@ -110,7 +113,6 @@ public class HomeController extends GridPane implements Observer {
 	 * Metoda čte příkaz ze vstupního textového pole a zpracuje ho...
 	 */
 	public void odesliPrikaz() {
-
 		String vypis = hra.zpracujPrikaz(textVstup.getText());
 		textVypis.appendText("\n--------\n" + textVstup.getText() + "\n--------\n");
 		textVypis.appendText(vypis);
@@ -182,8 +184,6 @@ public class HomeController extends GridPane implements Observer {
 	 */
 	@FXML
 	public void klikBatoh(MouseEvent klik) {
-		// vypis(hra.zpracujPrikaz("odhoď
-		// "+seznamBatoh.getSelectionModel().getSelectedItem()));
 		if (seznamBatoh.getSelectionModel().isEmpty()) {
 		} else {
 			String nazev = seznamBatoh.getSelectionModel().getSelectedItem();
@@ -248,7 +248,6 @@ public class HomeController extends GridPane implements Observer {
 		seznamPostavDej.setDisable(false);
 		seznamVeciDej.setDisable(false);
 		dej.setDisable(false);
-		// hra.getHerniPlan().setAktualniProstor(hra.getHerniPlan().getPuvodniProstor());
 		inicializuj(hra);
 	}
 
@@ -293,16 +292,21 @@ public class HomeController extends GridPane implements Observer {
 		stage.setTitle("Útěk z vězení – nápověda");
 	}
 
+	/**
+	 * Metoda provede inicializaci grafických prvků hry
+	 * 
+	 * @param hra
+	 *            aktuální hra
+	 * 
+	 */
 	public void inicializuj(IHra hra) {
 		this.hra = hra;
 		textVypis.setText(hra.vratUvitani());
 		textVypis.setEditable(false);
-		// seznamVeci.getItems().addAll(hra.getHerniPlan().getPuvodniProstor().getViditelneVeci());
 		seznamVeciDej.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
 		seznamMistnosti.getItems().addAll(hra.getHerniPlan().getPuvodniProstor().getVychody());
 		seznamPostav.getItems().addAll(hra.getHerniPlan().getPuvodniProstor().getViditelnePostavy());
 		seznamPostavDej.getItems().addAll(hra.getHerniPlan().getPuvodniProstor().getViditelnePostavy());
-		// seznamBatoh.getItems().addAll(hra.getHerniPlan().getBatoh().getSeznamVeci());
 		uzivatel.setX(hra.getHerniPlan().getPuvodniProstor().getX());
 		uzivatel.setY(hra.getHerniPlan().getPuvodniProstor().getY());
 		hra.getHerniPlan().addObserver(this);
@@ -311,6 +315,10 @@ public class HomeController extends GridPane implements Observer {
 		hra.getHerniPlan().getAktualniProstor().addObserver(this);
 	}
 
+	/**
+	 * Metoda pro aktualizaci grafických prvků hry.
+	 * 
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		seznamVeci.getItems().clear();
@@ -330,28 +338,28 @@ public class HomeController extends GridPane implements Observer {
 		if (hra.getHerniPlan().getBatoh().getSeznamVeci().isEmpty()) {
 		} else {
 			for (String nazevVeci : hra.getHerniPlan().getBatoh().getMapaVeci().keySet()) {
-				if (hra.getHerniPlan().getBatoh().getVec(nazevVeci).jeViditelnaVBatohu() == false) {}
-				else {
-				batohObservableList.add(nazevVeci);
-				seznamBatoh.setItems(batohObservableList);
-				seznamBatoh.setCellFactory(param -> new ListCell<String>() {
-					@Override
-					public void updateItem(String nazev, boolean empty) {
-						super.updateItem(nazev, empty);
-						if (empty) {
-							setText(null);
-							setGraphic(null);
-						} else {
-							String URL = hra.getHerniPlan().getBatoh().getVec(nazev).getImg();
-							Image img = new Image(getClass().getResourceAsStream(URL));
-							ImageView imageView = new ImageView();
-							imageView.setImage(img);
-							setText(nazev);
-							setGraphic(imageView);
+				if (hra.getHerniPlan().getBatoh().getVec(nazevVeci).jeViditelnaVBatohu() == false) {
+				} else {
+					batohObservableList.add(nazevVeci);
+					seznamBatoh.setItems(batohObservableList);
+					seznamBatoh.setCellFactory(param -> new ListCell<String>() {
+						@Override
+						public void updateItem(String nazev, boolean empty) {
+							super.updateItem(nazev, empty);
+							if (empty) {
+								setText(null);
+								setGraphic(null);
+							} else {
+								String URL = hra.getHerniPlan().getBatoh().getVec(nazev).getImg();
+								Image img = new Image(getClass().getResourceAsStream(URL));
+								ImageView imageView = new ImageView();
+								imageView.setImage(img);
+								setText(nazev);
+								setGraphic(imageView);
+							}
 						}
-					}
-				});
-			}
+					});
+				}
 			}
 		}
 

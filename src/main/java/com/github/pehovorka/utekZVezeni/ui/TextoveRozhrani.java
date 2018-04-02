@@ -1,4 +1,4 @@
-package com.github.pehovorka.utekZVezeni.uiText;
+package com.github.pehovorka.utekZVezeni.ui;
 
 
 import java.util.Scanner;
@@ -19,6 +19,7 @@ import java.io.*;
 
 public class TextoveRozhrani {
     private IHra hra;
+    private Scanner scanner;
 
     /**
      *  Vytváří hru.
@@ -75,7 +76,7 @@ public class TextoveRozhrani {
      *@return    Vrací přečtený příkaz jako instanci třídy String
      */
     private String prectiString() {
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         System.out.print("> ");
         return scanner.nextLine();
     }

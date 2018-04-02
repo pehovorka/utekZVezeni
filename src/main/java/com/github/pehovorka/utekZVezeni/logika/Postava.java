@@ -45,7 +45,6 @@ public class Postava
         this.recNechce = recNechce;
         this.recChce = recChce;
         this.mluvPo = mluvPo;
-        this.probehlaVymena = probehlaVymena;
         this.coChce = coChce;
         this.coMa = coMa;
     }

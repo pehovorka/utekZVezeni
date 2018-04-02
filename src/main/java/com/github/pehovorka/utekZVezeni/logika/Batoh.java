@@ -76,7 +76,7 @@ public class Batoh extends Observable
     public Vec getVec(String nazev) {
         return seznamVeci.get(nazev);
     }
-
+    
     /**
      * Metoda vrátí, zda je v batohu místo (porovná maximální počet věcí v batohu s aktuálním počtem věcí v batohu).
      *
@@ -98,6 +98,16 @@ public class Batoh extends Observable
         }
         return text;
     }
+    
+    /**
+     * Metoda pro zjištění obsahu batohu
+     *
+     * @return seznam věcí v batohu
+     */
+    public Map<String, Vec> getMapaVeci() {
+        return seznamVeci;
+    }
+    
     
     /**
      * Vrací kolekci věcí v batohu. 

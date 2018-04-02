@@ -45,26 +45,26 @@ public class HerniPlan extends Observable{
         Prostor toalety = new Prostor("wc","toalety","záchody - co to tu páchne?",226,281);
         Prostor cela = new Prostor("cela","moje cela","moje cela - můj dům",243,162);
         Prostor sachta = new Prostor("větracíŠachta","větrací šachta","větrací šachta - tady to páchne ještě hůř",180,300);
-        Prostor stoka = new Prostor("stoka","stoka","stoka - nechi vidět, co tu plave",115,280);
+        Prostor stoka = new Prostor("stoka","stoka","stoka - nechci vidět, co tu plave",115,280);
         Prostor svoboda = new Prostor("svoboda","svoboda","Jsi venku!",210,10);
 
         //vytváření věcí
-        Vec obed = new Vec("oběd","oběd",true);
-        Vec cigarety = new Vec("cigarety","cigarety",true);
-        Vec klicVzduchotechnika = new Vec("klíč1","nějaký klíč",true);
-        Vec klicSachta = new Vec("klíč2","další klíč",true);
-        Vec propustka = new Vec(null,null,true);
-        Vec potkan = new Vec("mrtvýPotkan","mrtvý potkan",true);
-        Vec misa = new Vec("záchodováMísa","záchodová mísa",false);
-        Vec zvykacka = new Vec("nalepenáŽvýkačka","nalepená žvýkačka",true);
-        Vec pacidlo = new Vec("páčidlo","páčidlo",true);
+        Vec obed = new Vec("oběd","oběd",true,"/ikony/obed.png");
+        Vec cigarety = new Vec("cigarety","cigarety",true,"/ikony/cigarety.png");
+        Vec klicVzduchotechnika = new Vec("klíč1","nějaký klíč",true,"/ikony/klic1.png");
+        Vec klicSachta = new Vec("klíč2","neznámý klíč",true,"/ikony/klic2.png");
+        Vec propustka = new Vec("",null,true,null);
+        Vec potkan = new Vec("mrtvýPotkan","mrtvého potkana",true,"/ikony/potkan.png");
+        Vec misa = new Vec("záchodováMísa","záchodová mísa",false,"/ikony/zachod.png");
+        Vec zvykacka = new Vec("žvýkačka","použitou žvýkačku",true,"/ikony/zvykacka.png");
+        Vec pacidlo = new Vec("páčidlo","páčidlo",true,"/ikony/pacidlo.png");
 
         //postavy – jméno, úvodní proslov, proslov k věci kterou nechce, proslov k věci kterou chce, proslov po výměně, věc kterou chce, věc kterou dá
         Postava fero = new Postava("Fero","Nazdárek kámo!","Nic nechci","","",null,null);
         Postava lojza = new Postava("Lojza","Čau, taky tě v noci budí ti potkani, co se prohání po celách?\nNějak se poslední dobou rozmnožili...","Nic nechci","","",null,null);
         Postava franta = new Postava("Franta","Včera jsem slyšel bachaře, když se bavil s údržbářem.\nVětrací šachta prý vede do stoky, která vytéká ven.\nZajímavý, co?","Nic nechci","","",null,null);
         Postava andrej = new Postava("Andrej","Všetci kradnú. Je to kampaň!","Co já s tím? Sorry jako!","","",null,null);
-        Postava udrzbar = new Postava("údržbář","Hej ty, chceš cigára? Někde jsem tu ztratil klíč, když ho najdeš, cigarety jsou tvoje. A hejbni sebou!","Chci ten klíč, ne tohle!","To je on. Tady máš ty cigarety a zmiz!","Co tu ještě chceš?",klicVzduchotechnika,cigarety);
+        Postava udrzbar = new Postava("údržbář","Hej ty, chceš cigára? Někde jsem tu ztratil klíč, když ho najdeš, cigarety jsou tvoje.\nA hejbni sebou!","Chci ten klíč, ne tohle!","To je on. Tady máš ty cigarety a zmiz!","Co tu ještě chceš?",klicVzduchotechnika,cigarety);
         Postava bezdomovec = new Postava("bezdomovec","Mám tě! Že ty zdrháš z basy?\nCo mi dáš za to, že tě neprásknu?\nCo třeba cigarety, máš?","To nejsou cigarety!\nTo už na mě nezkoušej!","Máš štěstí, můžeš jít.\nNikdy jsme se neviděli.","Jdi už.",cigarety,propustka);
 
         // přiřazují se průchody mezi prostory (sousedící prostory)
@@ -126,6 +126,9 @@ public class HerniPlan extends Observable{
         vzduchotechnika.zamknout(true);
         sachta.zamknout(true);
         stoka.zamknout(true);
+        
+        //nastavování viditelnosti věcí v batohu
+        propustka.setViditelnostVBatohu(false);
 
         //definice prostorů a věcí důležitých pro příběh      
         aktualniProstor = jidelna;  // hra začíná v jídelně
@@ -193,7 +196,6 @@ public class HerniPlan extends Observable{
         aktualniProstor = prostor;
         this.setChanged();
         this.notifyObservers();
-        System.out.println(aktualniProstor);
     }
 
     /**
@@ -204,6 +206,7 @@ public class HerniPlan extends Observable{
     public Batoh getBatoh() {
         return batoh;
     }
+    
     
     /**
      * Metoda vytváří batoh

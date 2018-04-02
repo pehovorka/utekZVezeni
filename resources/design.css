@@ -1,3 +1,6 @@
+@font-face {
+    src: url('Oswald-Light.ttf');
+}
 .root {
      -fx-background-image: url("textura.jpg");
      -fx-background-position: center; 
@@ -16,11 +19,20 @@
 -fx-text-fill: white;
 }
 
-.label{
+.nadpis {
+-fx-font-family: "Oswald Light", sans-serif;
+-fx-font-size: 20;
+}
 
+.dat-label {
 -fx-font-size: 15;
+}
+
+.label{
 -fx-text-fill: white;
 }
+
+
 
 .radio-button {
 
@@ -58,6 +70,12 @@
  -fx-background-radius: 2em;
 }
 
+.scroll-bar:horizontal .thumb {
+ -fx-background-color: rgba(0, 0, 0, 0.4);
+ -fx-background-insets: 0 4 0 4;
+ -fx-background-radius: 2em;
+}
+
 
 .text-input {
 	-fx-background-color: rgba(0, 0, 0, 0.2);	
@@ -74,10 +92,15 @@
 }
 
 .menu-bar {
-	-fx-background-color: rgba(0, 0, 0, 0.2);
+	-fx-background-color: transparent;
     -fx-background-insets: 0;
+    -fx-padding: 0;
     -fx-text-fill: white;
     -fx-font-size: 14;
+}
+
+.menu {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
 }
 
 .combo-box-popup .list-view 
@@ -102,3 +125,10 @@
     -fx-text-fill: white;
     -fx-font-size: 14;
 }
+.radio-button .radio {
+	-fx-background-color: rgba(0, 0, 0, 0.4);
+    -fx-mark-color: white;
+    -fx-mark-highlight-color: transparent;
+	
+}
+

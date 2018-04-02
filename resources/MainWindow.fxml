@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="1030.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.pehovorka.utekZVezeni.uiText.HomeController">
+<GridPane alignment="BASELINE_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="1080.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.pehovorka.utekZVezeni.ui.HomeController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -31,16 +31,19 @@
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="175.0">
+            <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label text="Dát - komu:" />
-                  <ComboBox fx:id="seznamPostavDej" prefWidth="150.0" />
-                  <Label text="Co:" />
-                  <ComboBox fx:id="seznamVeciDej" prefWidth="150.0" />
-                  <Button fx:id="dej" mnemonicParsing="false" onAction="#klikDej" text="Dej" />
-                  <Button fx:id="prohledatMistnost" mnemonicParsing="false" onAction="#klikProhledatMistnost" text="Prohledat místnost">
+                  <Label styleClass="dat-label" text="Dát - komu:" />
+                  <ComboBox fx:id="seznamPostavDej" prefWidth="200.0" />
+                  <Label styleClass="dat-label" text="Co:" />
+                  <ComboBox fx:id="seznamVeciDej" prefWidth="200.0" />
+                  <Button fx:id="dej" mnemonicParsing="false" onAction="#klikDej" prefWidth="200.0" text="Dej">
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="10.0" />
+                     </VBox.margin></Button>
+                  <Button fx:id="prohledatMistnost" mnemonicParsing="false" onAction="#klikProhledatMistnost" prefWidth="200.0" text="Prohledat místnost">
+                     <VBox.margin>
+                        <Insets top="50.0" />
                      </VBox.margin>
                   </Button>
                </children>
@@ -49,10 +52,10 @@
                <HBox.margin>
                   <Insets left="15.0" right="15.0" />
                </HBox.margin></TextArea>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label text="Batoh - odhodit" />
-                  <ListView fx:id="seznamBatoh" minWidth="-Infinity" onMouseClicked="#klikBatoh" prefHeight="200.0" prefWidth="175.0" />
+                  <Label styleClass="nadpis" text="Batoh - odhoď" />
+                  <ListView fx:id="seznamBatoh" minWidth="-Infinity" onMouseClicked="#klikBatoh" prefHeight="300.0" prefWidth="200.0" />
                </children>
             </VBox>
          </children>
@@ -61,7 +64,7 @@
          <children>
             <TextField fx:id="textVstup" maxHeight="30.0" maxWidth="550.0" minHeight="30.0" minWidth="550.0" onAction="#odesliPrikaz" prefHeight="30.0" prefWidth="550.0">
                <HBox.margin>
-                  <Insets left="190.0" right="7.0" />
+                  <Insets left="215.0" right="7.0" />
                </HBox.margin></TextField>
             <Button fx:id="odesli" maxHeight="30.0" maxWidth="63.0" minHeight="30.0" minWidth="63.0" mnemonicParsing="false" onAction="#odesliPrikaz" prefHeight="30.0" prefWidth="63.0" text="Odešli" />
          </children>
@@ -71,7 +74,7 @@
       </HBox>
       <HBox prefHeight="500.0" prefWidth="175.0">
          <children>
-            <VBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="175.0">
+            <VBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0">
                 
                <children>
                   <MenuBar>
@@ -86,13 +89,31 @@
                       </Menu>
                     </menus>
                   </MenuBar>
-                  <Label text="Prostory" />
-                  <RadioButton mnemonicParsing="false" selected="true" text="Jdi" userData="Jdi">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="prostoryGroup" />
-                     </toggleGroup></RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Odemkni" toggleGroup="$prostoryGroup" userData="Odemkni" />
-                  <ListView fx:id="seznamMistnosti" onMouseClicked="#klikMistnost" prefHeight="200.0" prefWidth="175.0" />
+                  <Label styleClass="nadpis" text="Východy">
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin></Label>
+                  <HBox prefWidth="200.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" selected="true" text="Jdi" userData="Jdi">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="prostoryGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="Odemkni" toggleGroup="$prostoryGroup" userData="Odemkni">
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <ListView fx:id="seznamMistnosti" onMouseClicked="#klikMistnost" prefHeight="250.0" prefWidth="175.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></ListView>
                </children>
             </VBox>
             <AnchorPane maxHeight="-Infinity" maxWidth="650.0" minWidth="650.0" prefHeight="500.0" prefWidth="650.0">
@@ -109,11 +130,11 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <VBox maxHeight="-Infinity" prefHeight="500.0" prefWidth="175.0">
+            <VBox maxHeight="-Infinity" prefHeight="500.0" prefWidth="200.0">
                <children>
-                  <Label text="Věci v prostoru - sebrat" />
+                  <Label styleClass="nadpis" text="Věci v prostoru - seber" />
                   <ListView fx:id="seznamVeci" onMouseClicked="#klikVec" prefHeight="200.0" prefWidth="200.0" />
-                  <Label text="Postavy v prostoru - mluvit" />
+                  <Label styleClass="nadpis" text="Postavy v prostoru - mluv" />
                   <ListView fx:id="seznamPostav" minWidth="-Infinity" onMouseClicked="#klikPostava" prefHeight="200.0" prefWidth="175.0" />
                </children>
             </VBox>

@@ -65,8 +65,8 @@ public class ProstorTest
     public void testVeci()
     {
         Prostor prostor1 = new Prostor("a", "", "",0,0);
-        Vec vec1 = new Vec("A","hezkyNazevVeciA", true);
-        Vec vec2 = new Vec("B","hezkyNazevVeciB", true);
+        Vec vec1 = new Vec("A","hezkyNazevVeciA", true, null);
+        Vec vec2 = new Vec("B","hezkyNazevVeciB", true, null);
         prostor1.vlozVec(vec1);
         prostor1.vlozVec(vec2);
         assertSame(vec1, prostor1.najdiVec("A"));
@@ -95,7 +95,7 @@ public class ProstorTest
     @Test
     public void testKlic()
     {
-        Vec vec1 = new Vec("klíč","Hezký název pro klíč", true);
+        Vec vec1 = new Vec("klíč","Hezký název pro klíč", true, null);
         Prostor prostor1 = new Prostor("prostor","", "",0,0);
         assertEquals(false, prostor1.jeZamceno());
         prostor1.zamknout(true);

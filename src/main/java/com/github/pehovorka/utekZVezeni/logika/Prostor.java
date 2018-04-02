@@ -1,6 +1,5 @@
 package com.github.pehovorka.utekZVezeni.logika;
 
-import java.io.Console;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.Observable;
@@ -127,7 +126,10 @@ public class Prostor extends Observable {
      * @return název prostoru
      */
     public String getHezkyNazev() {
-        return hezkyNazev;       
+    	String text = hezkyNazev;
+    	if (jeZamceno()) {text += " (zamčeno)";}
+        else {}
+    	return text;       
     }
 
     /**
@@ -149,7 +151,7 @@ public class Prostor extends Observable {
      */
     public void zamknout(boolean zamceno)
     {
-        this.zamceno = zamceno;
+    	this.zamceno = zamceno;
     }
 
     /**
@@ -159,7 +161,7 @@ public class Prostor extends Observable {
      */
     public boolean jeZamceno()
     {
-        return zamceno;
+    	return zamceno;
     }
 
     /**
@@ -168,7 +170,7 @@ public class Prostor extends Observable {
      * @return klíč
      */
     public Vec getKlic() {
-        return klic;
+    	return klic;
     }
 
     /**
@@ -207,7 +209,7 @@ public class Prostor extends Observable {
      */
     private String popisVeci() {     
         String vracenyText = "věci:";
-        if (veci.isEmpty()){
+        if (getViditelneVeci().isEmpty()){
             vracenyText +=" žádné";}
         else{
             for (String nazev:veci.keySet()) {
@@ -229,7 +231,9 @@ public class Prostor extends Observable {
      * null, pokud prostor zadaného jména není sousedem.
      */
     public Prostor vratSousedniProstor(String nazevSouseda) {
-        List<Prostor>hledaneProstory = 
+    	this.setChanged();
+        this.notifyObservers();
+    	List<Prostor>hledaneProstory = 
             vychody.stream()
             .filter(sousedni -> sousedni.getNazev().equals(nazevSouseda))
         .collect(Collectors.toList());
@@ -289,6 +293,20 @@ public class Prostor extends Observable {
     
 
 
+    /**
+     * Vrací viditelné věci v prostoru. 
+     * 
+        * @return Mapa viditelných věcí v prostoru
+     */
+    public Map<String,Vec> getMapaViditelneVeci() {
+        viditelneVeci = new HashMap<>();
+    	for (String nazev:veci.keySet()) {
+            if ((veci.get(nazev)).jeViditelna()){
+               viditelneVeci.put(nazev,veci.get(nazev));}
+        };
+        return viditelneVeci;
+    }
+    
     /**
      * Vrací viditelné věci v prostoru. 
      * 
@@ -398,19 +416,36 @@ public class Prostor extends Observable {
         return postavy.get(jmeno);
 
     }
-    
+    /**
+     * Vrací souřadnici prostoru na ose X
+     * 
+     * @return poloha na ose X v pixelech
+     */
     public double getX() {
 		return x;
 	}
-
+    /**
+     * Nastavuje souřadnici prostoru na ose X
+     * 
+     * @param x poloha na ose X v pixelech
+     */
 	public void setX(double x) {
 		this.x = x;
 	}
 
+    /**
+     * Vrací souřadnici prostoru na ose Y
+     * 
+     * @return poloha na ose Y v pixelech
+     */
 	public double getY() {
 		return y;
 	}
-
+    /**
+     * Nastavuje souřadnici prostoru na ose Y
+     * 
+     * @param y poloha na ose Y v pixelech
+     */
 	public void setY(double y) {
 		this.y = y;
 	}

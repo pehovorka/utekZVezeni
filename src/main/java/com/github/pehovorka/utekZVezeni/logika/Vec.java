@@ -18,8 +18,10 @@ public class Vec
     //== Datové atributy (statické i instancí)======================================
     private String nazev;
     private String hezkyNazev;
+    private String img;
     private boolean prenositelnost;
     private boolean viditelnost = true;
+    private boolean viditelnostVBatohu = true;
     private boolean prohledatelnost = false;
     //private Map<String,Vec> obsahVeci;
     //== Konstruktory a tovární metody =============================================
@@ -27,14 +29,16 @@ public class Vec
     /***************************************************************************
      *  Konstruktor
      *  @param nazev - název věci
+     *  @param hezkyNazev - hezký název věci pro GUI
      *  @param prenositelnost - booleanovská hodnota, zda je věc přenositelná
+     *  @param img - cesta k obrázku
      */
-    public Vec(String nazev, String hezkyNazev, boolean prenositelnost)
+    public Vec(String nazev, String hezkyNazev, boolean prenositelnost, String img )
     {
         this.nazev = nazev;
         this.prenositelnost = prenositelnost;
         this.hezkyNazev = hezkyNazev;
-        //obsahVeci = new HashMap<String,Vec>();
+        this.img = img;
     }
 
     //== Nesoukromé metody (instancí i třídy) ======================================
@@ -53,6 +57,14 @@ public class Vec
      */
     public String getHezkyNazev(){
         return hezkyNazev;
+    }
+    /**
+     * Vrací cestu k souboru s obrázkem
+     * 
+     * @return img - cesta k souboru s obrázkem
+     */
+    public String getImg(){
+        return img;
     }
     /**
      * Vrací přenositelnost věci.
@@ -87,6 +99,22 @@ public class Vec
         this.viditelnost=viditelnost;
     }
     /**
+     * Nastavuje viditelnost věci v batohu
+     * 
+     * @param viditelnost – booleanovská hodnota viditelnosti 
+     */
+    public void setViditelnostVBatohu(boolean viditelnostVBatohu){
+        this.viditelnostVBatohu=viditelnostVBatohu;
+    }
+    /**
+     * Vrací viditelnost věcí v batohu.
+     * 
+     * @return viditelnost - booleanovská hodnota zda je věc viditelná v batohu
+     */
+    public boolean jeViditelnaVBatohu(){
+        return viditelnostVBatohu;
+    }
+    /**
      * Nastavuje prohledatelnost věci
      * 
      * @param prohledatelnost – booleanovská hodnota prohledatelnosti 
@@ -97,7 +125,7 @@ public class Vec
    
     @Override
     public String toString() {
-    	return getHezkyNazev();
+    	return getNazev();
     }
 
 }
